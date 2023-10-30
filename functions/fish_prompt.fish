@@ -1,13 +1,13 @@
 function fish_prompt
-    # Colores
-    set color_user green
-    set color_at cyan
-    set color_host green
-    set color_path '#FFA500'  # Un naranja mate
-    set color_status blue
-    set color_normal normal
-    set color_clean green
-    set color_dirty red
+    # Colores en formato hexadecimal
+    set color_user '#008000'  # Verde
+    set color_at '#00FFFF'    # Cian
+    set color_host '#008000'  # Verde
+    set color_path '#FFA500'  # Naranja mate
+    set color_status '#0000FF'  # Azul
+    set color_normal '#FFFFFF'  # Blanco (normal)
+    set color_clean '#008000'  # Verde
+    set color_dirty '#FF0000'  # Rojo
     set symbol_git "📜"
     set symbol_energy "⚡"
     set symbol_pacman "👾"
@@ -41,7 +41,7 @@ function fish_prompt
             set git_status_color $color_clean
         end
 
-        echo -n -s (set_color blue)$symbol_git $git_info (set_color $git_status_color)$git_status_symbol ' '
+        echo -n -s (set_color '#0000FF')$symbol_git $git_info (set_color $git_status_color)$git_status_symbol ' '
     end
 
     # Símbolo de energía y duración del comando
@@ -56,7 +56,7 @@ end
 function fish_right_prompt
     # Duración del comando anterior
     set -l duration (math (date +%s) - $__fish_prompt_start_time)
-    echo -n -s (set_color yellow)(string replace -r '..' '.' (string repeat -n $duration '.'))
+    echo -n -s (set_color '#FFFF00')(string replace -r '..' '.' (string repeat -n $duration '.'))
 end
 
 # apt-get coloreado
