@@ -58,3 +58,30 @@ function fish_right_prompt
     set -l duration (math (date +%s) - $__fish_prompt_start_time)
     echo -n -s (set_color yellow)(string replace -r '..' '.' (string repeat -n $duration '.'))
 end
+
+# apt-get coloreado
+# function apt-get
+#     command apt-get $argv | pv -p > /dev/null
+# end
+
+# function apt-get
+#     # Ejecutar el comando real 'apt-get' y capturar su salida
+#     command apt-get $argv 2>&1 | while read -l line
+#         switch $line
+#             # Aquí se procesaría cada línea para buscar información del progreso
+#             # y se imprimiría la barra de progreso correspondiente.
+#             # Este es un ejemplo muy básico y probablemente necesites ajustarlo:
+#             case '*%*'
+#                 set -l percent (string match -r -o '\d+%' -- $line)
+#                 set -l clean_percent (string replace '%' '' -- $percent)
+#                 set -l length (math $clean_percent / 4) # Ajustar la longitud de la barra
+#                 set -l bar (string repeat -n $length "=")
+#                 # Borrar la línea actual y mostrar la barra de progreso
+#                 printf "\r[%-25s] %s%%" $bar $clean_percent
+#             case '*'
+#                 # Para cualquier otra línea, simplemente imprimir como está
+#                 echo $line
+#         end
+#     end
+#     echo
+# end
