@@ -54,10 +54,14 @@ function fish_prompt
 end
 
 function fish_right_prompt
-    # Duración del comando anterior
-    set -l duration (math (date +%s) - $__fish_prompt_start_time)
-    echo -n -s (set_color '#FFFF00')(string replace -r '..' '.' (string repeat -n $duration '.'))
+    # Duración del comando anterior en segundos
+    set -l end_time (date +%s)
+    set -l duration (math $end_time - $__fish_prompt_start_time)
+
+    # Muestra la duración en segundos
+    echo -n -s (set_color yellow)$duration's '
 end
+
 
 # apt-get coloreado
 # function apt-get
