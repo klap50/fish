@@ -40,18 +40,27 @@ else
     echo "✅ Starship ya estaba presente en config.fish"
 fi
 
+
 echo "🔁 Verificando si Fish ya es tu shell por defecto..."
 FISH_PATH=$(which fish)
 if [ "$SHELL" != "$FISH_PATH" ]; then
-    echo "🔁 Intentando establecer Fish como shell por defecto..."
+    echo "⏳ Vas a cambiar tu shell por defecto a Fish ($FISH_PATH)"
+    echo "🔐 Si se requiere contraseña, ingresala cuando se solicite."
+    for i in {10..1}; do
+        echo -ne "⌛ Comenzando en $i segundos...\r"
+        sleep 1
+    done
+    echo
+
     if command -v chsh &> /dev/null; then
-        chsh -s "$FISH_PATH" || echo "⚠️ No se pudo cambiar el shell automáticamente. Hacelo manualmente con: chsh -s $FISH_PATH"
+        chsh -s "$FISH_PATH" || echo "⚠️ No se pudo cambiar el shell automáticamente. Podés hacerlo manualmente con: chsh -s $FISH_PATH"
     else
         echo "⚠️ El comando 'chsh' no está disponible. Cambiá el shell manualmente con: chsh -s $FISH_PATH"
     fi
 else
     echo "✅ Fish ya es tu shell por defecto."
 fi
+
 
 echo "✅ Instalación completa."
 echo "🖥️ Si usás terminal gráfica, seleccioná la fuente: Hack Nerd Font"
