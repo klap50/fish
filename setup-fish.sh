@@ -45,10 +45,15 @@ if ! grep -q "starship init fish" ~/.config/fish/config.fish; then
     echo "🧠 Starship agregado al final de config.fish"
 fi
 
-# Establecer Fish como shell por defecto
-echo "🔁 Estableciendo Fish como tu shell por defecto..."
-chsh -s /usr/bin/fish
+# Establecer Fish como shell por defecto si no lo es ya
+if [ "$SHELL" != "/usr/bin/fish" ]; then
+    echo "🔁 Intentando establecer Fish como shell por defecto..."
+    if command -v chsh &> /dev/null; then
+        chsh -s /usr/bin/fish || echo "⚠️ No se pudo cambiar el shell automáticamente. Hacelo manualmente con: chsh -s /usr/bin/fish"
+    else
+        echo "⚠️ El comando 'chsh' no está disponible. Cambiá el shell manualmente con: chsh -s /usr/bin/fish"
+    fi
+else
+    echo "✅ Fish ya es tu shell por defecto."
+fi
 
-echo "✅ Instalación completa."
-echo "🖥️ Abrí una nueva terminal y seleccioná la fuente: Hack Nerd Font."
-echo "🌈 ¡Disfrutá tu entorno Fish con estilo, klap! 😎"
