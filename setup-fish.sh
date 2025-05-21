@@ -39,11 +39,16 @@ cp -r "$REPO_DIR/completions" ~/.config/fish/ 2>/dev/null || true
 cp "$REPO_DIR/config.fish" ~/.config/fish/config.fish
 cp "$REPO_DIR/fish_variables" ~/.config/fish/fish_variables
 
-# Agregar Starship si no está ya
+echo "🎣 Configurando Starship en Fish..."
+
+# Evitar duplicados
 if ! grep -q "starship init fish" ~/.config/fish/config.fish; then
     echo 'starship init fish | source' >> ~/.config/fish/config.fish
     echo "🧠 Starship agregado al final de config.fish"
+else
+    echo "🔁 Starship ya está presente en config.fish"
 fi
+
 
 # Establecer Fish como shell por defecto si no lo es ya
 if [ "$SHELL" != "/usr/bin/fish" ]; then
