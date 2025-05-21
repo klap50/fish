@@ -170,3 +170,19 @@ if status --is-interactive && type -q fastfetch
 end
 starship init fish | source
 
+## Fish-Push para actualizar funciones
+function fish-push --description "Guardar y subir configuración de Fish al repo"
+    echo "🔍 Verificando si estás en un repo Git..."
+    if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+        echo "❌ No estás en un repositorio Git. Abortando."
+        return 1
+    end
+
+    echo "📂 Agregando funciones, conf.d y completions..."
+    git add functions/*.fish conf.d/*.fish completions/*.fish 2>/dev/null
+
+    set fecha (date "+%Y-%m-%d %H:%M")
+    git commit -m "fish-push: actualizar configuración ($fecha)"
+    echo "🚀 Haciendo push al branch actual..."
+    git push
+end
