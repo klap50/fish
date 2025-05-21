@@ -3,7 +3,7 @@
 set -e
 
 echo "📦 Instalando dependencias básicas para Arch/Garuda..."
-sudo pacman -Syu --noconfirm
+sudo pacman -Sy --noconfirm
 sudo pacman -S --noconfirm fish exa bat fd fzf git curl unzip zoxide
 
 echo "🌟 Instalando Starship..."
