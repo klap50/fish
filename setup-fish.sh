@@ -29,7 +29,18 @@ fi
 
 echo "📁 Instalando configuración de Fish..."
 mkdir -p ~/.config/fish
-cp -r "$REPO_DIR/conf.d" "$REPO_DIR/functions" "$REPO_DIR/completions" ~/.config/fish/ 2>/dev/null || true
+echo "🧹 Limpiando funciones anteriores personalizadas (no del sistema)..."
+rm -rf ~/.config/fish/conf.d
+rm -rf ~/.config/fish/functions
+rm -rf ~/.config/fish/completions
+
+echo "📁 Copiando funciones, completions y config.fish..."
+cp -r "$REPO_DIR/conf.d" ~/.config/fish/
+cp -r "$REPO_DIR/functions" ~/.config/fish/
+cp -r "$REPO_DIR/completions" ~/.config/fish/
+cp "$REPO_DIR/config.fish" ~/.config/fish/
+cp "$REPO_DIR/fish_variables" ~/.config/fish/
+
 cp "$REPO_DIR/config.fish" "$REPO_DIR/fish_variables" ~/.config/fish/
 
 echo "🎣 Configurando Starship en Fish..."
