@@ -105,8 +105,18 @@ alias l.='exa -ald --color=always --group-directories-first --icons .*' # show o
 alias ip='ip -color'
 
 # Replace some more things with better alternatives
-alias cat='bat --style header --style snip --style changes --style header'
-[ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
+# Toquetenado el CAT y BATCAT
+if type -q bat
+    alias bat='batcat --style header --style snip --style changes --style header'
+else
+    alias cat='cat'
+end
+
+#madadm stats
+function watch_mdstat
+    watch -n 1 'batcat /proc/mdstat'
+end
+
 
 # Common use
 alias grubup="sudo update-grub"
@@ -159,3 +169,4 @@ if status --is-interactive && type -q fastfetch
    fastfetch --load-config neofetch
 end
 starship init fish | source
+
